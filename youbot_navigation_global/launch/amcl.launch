@@ -1,9 +1,20 @@
 <launch>
-	<!-- Run map server -->
+  <!-- whether the map argument is a full path. 
+       if not, it assumes maps are in youbot_navigation_global/map" -->
+  <arg name="use_fullpathmap" default="false" />
+  <!-- the location of the map to load -->
+  <arg name="map" default="default-map.yaml" />
 
-<!-- 	<node name="map_server" pkg="map_server" type="map_server" args="$(find youbot_navigation_global)/map/hanoi_map.yaml"/>-->
+  <!-- Run map server and map transform publisher (0,0,0) to odom -->
+  <group unless="$(arg use_fullpathmap)">
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find youbot_navigation_global)/map/$(arg map)"/>
+  </group>
+  <group if="$(arg use_fullpathmap)">
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map)"/>
+  </group>
 
-
+  <!-- Run slam gmapping -->
+  <!-- (moved to youbot_navigation_common's bringup_navigation.launch) -->
 <!--
     <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
       <param name="map_update_interval" value="5.0"/>

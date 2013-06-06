@@ -1,13 +1,28 @@
-<!-- Launch file to brin up all essentioal nodes for navigation with obstagle avoidance.
-This scrip doe not start any SLAM algorithm.
+<!-- Launch file to bring up all essential nodes for navigation with obstacle avoidance.
+Brings up SLAM gmapping if slam:=true and flips the laser scan if flip_laser:=true
 -->
 
 <launch>
 
-        <include file="$(find youbot_oodl)/launch/youbot_oodl_driver.launch" />
-        <include file="$(find youbot_oodl)/launch/youbot_joint_state_publisher.launch" />
-        <include file="$(find youbot_navigation_common)/launch/base_front_hokuyo_node.launch" />
-        <include file="$(find youbot_navigation_local)/launch/move_base_local.launch" />
+  <!-- whether to perform slam -->
+  <arg name="slam" default="false" />
+
+  <include file="$(find youbot_oodl)/launch/youbot_oodl.launch" />
+  <include file="$(find youbot_oodl)/launch/youbot_joint_state_publisher.launch" />
+  <include file="$(find youbot_navigation_common)/launch/base_front_hokuyo_node.launch" />
+  <include file="$(find youbot_navigation_local)/launch/move_base_local.launch" />
+
+  <group if="$(arg slam)">
+       <!-- flip the laser and set slam to use the flipped laser topic -->
+       <node name="laser_flipper" pkg="laser_flipper" type="laser_flipper" />
+
+    <!-- shrink the map size -->
+    <param name="scan" type="str" value="base_scan_flipped" />
+    <param name="xmin" type="double" value="-10.0" />
+    <param name="ymin" type="double" value="-10.0" />
+    <param name="xmax" type="double" value="10.0" />
+    <param name="ymax" type="double" value="10.0" />
+    <node name="slam_gmapping" pkg="gmapping" type="slam_gmapping" />
+  </group>
 
 </launch>
-
