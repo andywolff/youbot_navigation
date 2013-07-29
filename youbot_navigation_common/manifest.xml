@@ -7,7 +7,7 @@
   <author>Alexey Zakharov</author>
   <license>LGPL, BSD</license>
   <review status="unreviewed" notes=""/>
-  <url>http://ros.org/wiki/youbot_oodl</url>
+  <url>http://ros.org/wiki/youbot_navigation_common</url>
   <depend package="roscpp"/>
   <depend package="geometry_msgs"/>
   <depend package="hokuyo_node" />
