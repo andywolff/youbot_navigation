@@ -4,9 +4,9 @@ You must start map_server separately with the desired map.
 
 <launch>
 
-  <include file="$(find youbot_oodl)/launch/youbot_oodl.launch" />
-  <include file="$(find youbot_oodl)/launch/youbot_joint_state_publisher.launch" />
-  <include file="$(find youbot_navigation_common)/launch/base_front_hokuyo_node.launch" />
+<!--  <include file="$(find youbot_common)/launch/youbot_wrapper.launch" />
+  <include file="$(find youbot_common)/launch/youbot_joint_state_publisher.launch" />
+-->  <include file="$(find youbot_navigation_common)/launch/base_front_hokuyo_node.launch" />
   <include file="$(find youbot_navigation_global)/launch/move_base_global.launch" />
   <include file="$(find youbot_navigation_global)/launch/amcl.launch" />
 
