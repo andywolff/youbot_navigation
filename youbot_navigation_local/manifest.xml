@@ -7,7 +7,7 @@
   <author>Alexey Zakharov</author>
   <license>LGPL, BSD</license>
   <review status="unreviewed" notes=""/>
-  <url>http://ros.org/wiki/youbot_oodl</url>
+  <url>http://ros.org/wiki/youbot_navigation_local</url>
   <depend package="move_base" />
   
 </package>
